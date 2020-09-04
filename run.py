@@ -1,6 +1,9 @@
 #!/usr/bin/env python3.8
+
+from random import choice,randint
 from user import User
 """import the user class blueprint"""
+
 from credentials import Credentials
 """import the credentials class blueprint"""
 
@@ -15,13 +18,13 @@ def save_credentials(credentials):
     '''
     Function to save credentials
     '''
-    save_credential()
+    Credentials.save_credential()
 
 def del_credentials(contact):
     '''
     Function to delete a credential
     '''
-    delete_credential()
+    Credentials.credentials_list.remove()
 
 def find_contact(number):
     '''
@@ -33,7 +36,7 @@ def display_credentials():
     '''
     Function that returns all the saved account credentials
     '''
-    return display_credential()
+    return Credentials.display_credential()
 
 def copy_credentials():
     '''
@@ -41,71 +44,86 @@ def copy_credentials():
     '''
     return copy_credentials()
 
-def generate_password():
-    '''
-    Function that generates a password for an account
-    '''
-    return gen_password()
+def gen_password(num_chars=3,num_numbers=3, num_special=2):
+        special_chars=['!','?','_']
+        password=''
+        chars=['a','b','c']
+        for _ in range(num_chars):
+                password+=choice(chars)
+
+        for _ in range(num_numbers):
+                password+=str(randint(0,9))
+
+        for _ in range(num_special):
+                password+=choice(special_chars)
+
+        print(f"{password}")
+    
+
+
 
 
 def main():
     print("Hello Welcome to Password Locker. What is your name?")
-    
     name=input()
-        print(f"Hello {name}. what would you like to do?")
-            print('\n')
+    print(f"Hello {name}. what would you like to do?")
 
-            while True:
-                    print("Use these short codes : cc - create new credentials, dc - display all credentials, del-delete account credentials ex -exit the password locker ")
+    while True:
+        print("USE THESE SHORT CODES :\ncc - create new credentials, \ndc - display all credentials, \ndel-delete account credentials, \nex -exit the password locker ")
 
-                    short_code = input().lower()
+        short_code = input().lower()
 
-                    if short_code == 'cc':
-                            print("Add new Credentials")
-                            print("-"*10)
+        if short_code == 'cc':
+            print("Add new Credentials")
+            print("-"*10)
 
-                            print ("Account name ....")
-                            f_name = input()
+            print ("Account name ....")
+            account = input()
 
-                            print("Username ...")
-                            l_name = input()
+            print("Username ...")
+            username = input()
 
-                            print("Password ...")
-                            p_number = input()
+            print("Password ...")
+            password = input()
 
 
-                            save_credentials(create_credentials(accountName,username,password)) # create and save new account credentials.
-                            print ('\n')
-                            print(f"New account credentials {accountName} {username} created")
-                            print ('\n')
+            save_credentials(create_credentials(account,username,password)) # create and save new account credentials.
+            print ('\n')
+            print(f"New account credentials {account} {username} created")
+            print ('\n')
 
-                    elif short_code == 'dc':
+        elif short_code == 'dc':
 
                             if display_credentials():
                                     print("Here is a list of all your accounts credentials")
                                     print('\n')
 
                                     for credential in display_credentials():
-                                            print(f"{credential.accountName} {credential.username}")
+                                            print(f"{credential.accountName} {credential.username} {credential.password}")
 
                                     print('\n')
                             else:
                                     print('\n')
-                                    print("You haven't saved any accounts details")
+                                    print("You haven't saved any account details")
                                     print('\n')
 
-                    elif short_code == 'del':
+        elif short_code == 'del':
+            gen_password()
 
-                            print("Enter the account name you want to remove")
+            """print("Enter the account name you want to remove")
 
                             del_number = input()
                       
 
-                                    print("That account does not exist")
+                                    print("That account does not exist")"""
 
-                    elif short_code == "ex":
-                            print("Goodbye .......courtesy PLocker(vector) 2020")
-                            break
-                    else:
-                            print("I really didn't get that. Please use the short codes")
+        elif short_code == "ex":
+            print("Goodbye .......courtesy PLocker(vector) 2020")
+            break
+        
+        else:
+            print("I really didn't get that. Please use the short codes")
 
+if __name__ == '__main__':
+                """main function to run the module"""
+main()
