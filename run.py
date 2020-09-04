@@ -7,6 +7,19 @@ from user import User
 from credentials import Credentials
 """import the credentials class blueprint"""
 
+def create_user(username,password):
+	'''
+	Function to create a new user account
+	'''
+	new_user = User(username,password)
+	return new_user
+
+def save_user(user):
+	'''
+	Function to save a new user account
+	'''
+	User.save_login(user)
+
 def create_credentials(accountName,username,password):
     '''
     Function to create a new user
@@ -18,19 +31,14 @@ def save_credentials(credentials):
     '''
     Function to save credentials
     '''
-    Credentials.save_credential()
+    Credentials.save_credential(credentials)
 
-def del_credentials(contact):
+def del_credentials(account):
     '''
     Function to delete a credential
     '''
-    Credentials.credentials_list.remove()
+    Credentials.credentials_list.remove(account)
 
-def find_contact(number):
-    '''
-    Function that searches an acount by account_name and returns the credentials
-    '''
-    return find_by_name(accountName)
 
 def display_credentials():
     '''
@@ -64,42 +72,75 @@ def gen_password(num_chars=3,num_numbers=3, num_special=2):
 
 
 def main():
-    print("Hello Welcome to Password Locker. What is your name?")
-    name=input()
-    print(f"Hello {name}. what would you like to do?")
-
+    print("Hello! Welcome to PASSWORD LOCKER ")
     while True:
-        print("USE THESE SHORT CODES :\ncc - create new credentials, \ndc - display all credentials, \ndel-delete account credentials, \nex -exit the password locker ")
+        print("USE THESE SHORT CODES :\nca-create account, \nli - login to your account, \nex -exit password locker ")
 
         short_code = input().lower()
+        if short_code == 'ca':
+            print('Create a new account')
+            print('*'*10)
 
-        if short_code == 'cc':
-            print("Add new Credentials")
-            print("-"*10)
+            print("Username...")
+            username= input()
 
-            print ("Account name ....")
-            account = input()
+            print ('Password...')
+            password= input()
 
-            print("Username ...")
-            username = input()
+            save_user(create_user(username,password)) # create and save new user account.
+            print(f"New User: {username} Password:{password}created successfully")
 
-            print("Password ...")
-            password = input()
+        elif short_code == 'li':
+            print("Enter your Username")
+            username= input()
+
+            print('Enter your Password')
+            password= input()
+            
+            """credential creation and manipulation functions"""
+            
+            print(f"Hello {username} Welcome to your Password Locker account.") 
+
+            while True:
+                print("WHAT WOULD YOU LIKE TO DO? :\ncc - create new credentials, \ndc - display all credentials, \ndel-delete account credentials, \nex -exit the password locker ")
+
+                short_code = input().lower()
+
+                if short_code == 'cc':
+                    print("Add new Credentials")
+                    print("-"*10)
+
+                    print ("Account name ....")
+                    account = input()
+
+                    print("Username ...")
+                    username = input()
+
+                    print("I WOULD LIKE TO \n cp - create my own password \n gp - generate a password :)")
+                    short_code = input().lower()
+
+                    if short_code== 'cp':
+                        print ("Enter password")
+                        password=input()
+
+                    elif short_code== 'gp':
+                        print ("This is yor password:")
+                        gen_password()
 
 
-            save_credentials(create_credentials(account,username,password)) # create and save new account credentials.
-            print ('\n')
-            print(f"New account credentials {account} {username} created")
-            print ('\n')
+                    save_credentials(create_credentials(account,username,password)) # create and save new account credentials.
+                    print ('\n')
+                    print(f"New account credentials, NAME: {account}\n USER: {username}  added successfully")
+                    print ('\n')
 
-        elif short_code == 'dc':
+                elif short_code == 'dc':
 
                             if display_credentials():
                                     print("Here is a list of all your accounts credentials")
                                     print('\n')
 
                                     for credential in display_credentials():
-                                            print(f"{credential.accountName} {credential.username} {credential.password}")
+                                            print(f"{credential.account} {credential.username} {credential.password}")
 
                                     print('\n')
                             else:
@@ -107,23 +148,29 @@ def main():
                                     print("You haven't saved any account details")
                                     print('\n')
 
-        elif short_code == 'del':
-            gen_password()
+                elif short_code == 'del':
+                    print("Enter the name of account you wish to delete:")
+                    account=input()
+                    del_credentials(account)
 
-            """print("Enter the account name you want to remove")
+               
+                elif short_code == "ex":
+                    print("Goodbye .......courtesy PLocker(vector) 2020")
+                    break
+        
+                else:
+                    print("I really didn't get that. Please use the short codes")
 
-                            del_number = input()
-                      
 
-                                    print("That account does not exist")"""
 
         elif short_code == "ex":
             print("Goodbye .......courtesy PLocker(vector) 2020")
             break
-        
+
         else:
             print("I really didn't get that. Please use the short codes")
 
+    
 if __name__ == '__main__':
                 """main function to run the module"""
 main()
