@@ -24,8 +24,8 @@ def confirm_user(username,password):
 	'''
 	Function that verifies the existance of the user before allowing login
 	'''
-	Credentials.confirmed(first_name,password)
-	return confirmed
+    status = User.confirm(username,password)
+	return status
 
 def create_credentials(accountName,username,password):
     '''
@@ -84,14 +84,15 @@ def gen_password(num_chars=3,num_numbers=3, num_special=2):
 
 """Main execution program"""
 def main():
-    print("Hello! Welcome to PASSWORD LOCKER ")
+    print("Welcome to   P A S S W O R D   L O C K E R ")
+    print("*"*70)
     while True:
-        print("USE THESE SHORT CODES :\nca-create account, \nli - login to your account, \nex -exit password locker ")
-
+        print("USE THESE SHORT CODES :\n"+'*'*50 + "\nca - create account, \nli - login to your account, \nex - exit password locker ")
+        print("*"*70)
         short_code = input().lower() #get user input
         if short_code == 'ca':
             print('Create a new account')
-            print('*'*10) #add decoration
+            print('*'*50) #add decoration
 
             print("Username...")
             username= input() #get username from user
@@ -109,16 +110,15 @@ def main():
             print('Enter your Password') #prompt for password
             password= input()
 
-            confirm_user(username,password)#check if user exists
-
-            if Credentials.confirmed: #if user exists proceed
-            
-                """credential creation and manipulation functions"""
-            
-                print(f"Hello {username} Welcome to your Password Locker account.") 
-
+            status=confirm_user(username,password)
+            if status == username:#check if user exists
+		       
                 while True:
-                    print("WHAT WOULD YOU LIKE TO DO? :\ncc - create new credentials, \ndc - display all credentials, \ndel-delete account credentials, \nex -exit the password locker ")
+                    """credential creation and manipulation functions"""
+            
+                    print(f"Hello {username} Welcome to your Password Locker account.") 
+
+                    print("WHAT WOULD YOU LIKE TO DO? :\ncc - create new credentials, \ndc - display all credentials, \ndel - delete account credentials, \nex - logout ")
                     '''prompt for user input to proceed'''
                     short_code = input().lower()
 
@@ -147,7 +147,7 @@ def main():
 
                         save_credentials(create_credentials(account,username,password)) # create and save new account credentials.
                         print ('\n')
-                        print(f"New account credentials, NAME: {account}\n USER: {username}  added successfully")
+                        print(f"New account credentials,\nNAME: {account}\nUSER: {username}  added successfully!")
                         print ('\n')
 
                     elif short_code == 'dc':
@@ -157,7 +157,7 @@ def main():
                                     print('\n')
 
                                     for credential in display_credentials():
-                                            print(f"{credential.account} {credential.username} {credential.password}")
+                                            print(f"ACCOUNT:{credential.account} \nUSER:{credential.username} \nPASSWORD:{credential.password}")
 
                                     print('\n')
                             else:
