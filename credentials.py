@@ -4,6 +4,6 @@ class Credentials:
     def __init__(self,accout,username,password):
         """define properties for our objects."""
 
-        self.account= accout
+        self.account= accoutName
         self.username = username
         self.password = password
