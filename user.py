@@ -9,6 +9,6 @@ class User:
 
     def save_login(self):
         """
-        save_contact method saves contact objects into user_array
+        save_contact method to save new user to user list
         """
         User.user_list.append(self)
