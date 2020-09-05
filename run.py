@@ -49,7 +49,8 @@ def del_credentials(account):
     '''
     Function to delete a credential
     '''
-    deleted=Credentials.check_account(account)
+    credential=Credentials.find_account(account)
+    deleted=Credentials.del_account(credential)
     return deleted
     
 
@@ -90,12 +91,12 @@ def gen_password(num_chars=3,num_numbers=3, num_special=2):
 
 """Main program execution"""
 def main():
-    print("         Welcome to                      ____             ")
-    print(" ____             _                     / __ \    ")
-    print("||  ||            ||                   | |  | |   ")
-    print("||__||            ||                   |_|__|_|   ")
-    print("||                ||____              |        |  ")
-    print("|| A S S W O R D  |_____| O C K E R   |________|  ")
+    print("                                         ____                    ")
+    print(" ___     welcome   _       to           / __ \                   ")
+    print("||  ||            ||                   | |  | |      __________  ")
+    print("||__||            ||                   |_|__|_|      | vector | ")
+    print("||                ||____              | v 1.1  |     | (2020) |  ")
+    print("|| A S S W O R D  |_____| O C K E R   |________|     **********  ")
 
     print("*"*70)
     while True:
@@ -130,7 +131,7 @@ def main():
             
                     print(f"Hello {username} Welcome to your Password Locker account.") 
 
-                    print("WHAT WOULD YOU LIKE TO DO? :\ncc - create new credentials, \ndc - display all credentials, \ndel - delete account credentials, \nex - logout ")
+                    print("WHAT WOULD YOU LIKE TO DO?\n"+"*"*70+" :\ncc - create new credentials, \ndc - display all credentials, \ndel - delete account credentials, \nex - logout ")
                     '''prompt for user input to proceed'''
                     short_code = input().lower()
 
