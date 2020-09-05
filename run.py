@@ -94,8 +94,8 @@ def main():
     print("                                         ____                    ")
     print(" ___     welcome   _       to           / __ \                   ")
     print("||  ||            ||                   | |  | |      __________  ")
-    print("||__||            ||                   |_|__|_|      | vector | ")
-    print("||                ||____              | v 1.1  |     | (2020) |  ")
+    print("||__||            ||                   |_|__|_|      | vector |  ")
+    print("||                ||____              | v 1.0  |     | (2020) |  ")
     print("|| A S S W O R D  |_____| O C K E R   |________|     **********  ")
 
     print("*"*70)
