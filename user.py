@@ -14,12 +14,7 @@ class User:
         """
         User.user_list.append(self)
 
-    def confirm(username,password):
-        ifexists=''
-        for user in User.user_list:
-            if (user.username == username and user.password == password):
-                    ifexists = user.username
-        return ifexists
+    
 
 
     

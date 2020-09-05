@@ -19,13 +19,17 @@ def save_user(user):
 	Function to save a new user account
 	'''
 	User.save_login(user)
-
+   
 def confirm_user(username,password):
-	'''
+    '''
 	Function that verifies the existance of the user before allowing login
 	'''
-    status = User.confirm(username,password)
-	return status
+    ifexists=''
+    for user in User.user_list:
+        if (user.username == username and user.password == password):
+                    ifexists = user.username
+        return ifexists
+
 
 def create_credentials(accountName,username,password):
     '''
@@ -41,11 +45,11 @@ def save_credentials(credentials):
     Credentials.save_credential(credentials)
     
 
-def del_credentials(account):
+def del_credentials(self):
     '''
     Function to delete a credential
     '''
-    Credentials.credentials_list.remove(account)
+    Credentials.credentials_list.remove(self)
 
 
 def display_credentials():
@@ -84,7 +88,13 @@ def gen_password(num_chars=3,num_numbers=3, num_special=2):
 
 """Main execution program"""
 def main():
-    print("Welcome to   P A S S W O R D   L O C K E R ")
+    print("         Welcome to                      ____             ")
+    print(" ____             _                     / __ \    ")
+    print("||  ||            ||                   | |  | |   ")
+    print("||__||            ||                   |_|__|_|   ")
+    print("||                ||____              |        |  ")
+    print("|| A S S W O R D  |_____| O C K E R   |________|  ")
+
     print("*"*70)
     while True:
         print("USE THESE SHORT CODES :\n"+'*'*50 + "\nca - create account, \nli - login to your account, \nex - exit password locker ")
