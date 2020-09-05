@@ -22,4 +22,13 @@ class Credentials:
         """
         return Credentials.credentials_list
 
+    def check_account(account):
+        for credential in Credentials.credentials_list:
+            if credential.account == account:
+                Credentials.credentials_list.remove(credential)
+                return credential
+       
+
+        
+
     

@@ -45,11 +45,13 @@ def save_credentials(credentials):
     Credentials.save_credential(credentials)
     
 
-def del_credentials(self):
+def del_credentials(account):
     '''
     Function to delete a credential
     '''
-    Credentials.credentials_list.remove(self)
+    deleted=Credentials.check_account(account)
+    return deleted
+    
 
 
 def display_credentials():
@@ -86,7 +88,7 @@ def gen_password(num_chars=3,num_numbers=3, num_special=2):
 
 
 
-"""Main execution program"""
+"""Main program execution"""
 def main():
     print("         Welcome to                      ____             ")
     print(" ____             _                     / __ \    ")
@@ -142,7 +144,7 @@ def main():
                         print("Username ...")
                         username = input()
 
-                        print("I WOULD LIKE TO \n cp - create my own password \n gp - generate a password :)")
+                        print("I WOULD LIKE TO\n"+"*"*70+" \n cp - create my own password \n gp - generate a password :)")
                         short_code = input().lower()
 
                         if short_code== 'cp':
@@ -178,7 +180,8 @@ def main():
                     elif short_code == 'del':
                         print("Enter the name of account you wish to delete:")
                         account=input()
-                        del_credentials(account)
+                        deleted=del_credentials(account)
+                        print(f"The {deleted.account} account has been deleted sussesfully!")
 
                
                     elif short_code == "ex": #exit  credential creation on user selection
