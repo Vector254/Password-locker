@@ -67,23 +67,25 @@ def copy_credentials():
     '''
     return copy_credentials()
 
-def gen_password(num_chars=3,num_numbers=3, num_special=2):
+def gen_password(num_numbers=3, num_special=2, num_chars=3):
         '''function to generate a random password'''
         special_chars=['!','?','_','*','@']
-        password=''
+        gen_pass=''
         chars=['a','b','c','d','e','f','g']
 
         '''loop to iterate through the numbers, characters and special characters and return a random password'''
-        for _ in range(num_chars):
-                password+=choice(chars)
+       
 
         for _ in range(num_numbers):
-                password+=str(randint(0,9))
+                gen_pass+=str(randint(0,9))
 
         for _ in range(num_special):
-                password+=choice(special_chars)
+                gen_pass+=choice(special_chars)
 
-        return password
+        for _ in range(num_chars):
+                gen_pass+=choice(chars)
+
+        return gen_pass
     
 
 
@@ -154,8 +156,8 @@ def main():
 
                         elif short_code== 'gp':
                             print ("This is yor password:")
-                            gen_password()
-                            print(f"{password}")
+                            gen=gen_password()
+                            print(f"{gen}")
 
 
                         save_credentials(create_credentials(account,username,password)) # create and save new account credentials.
@@ -166,11 +168,11 @@ def main():
                     elif short_code == 'dc':
 
                             if display_credentials():
-                                    print("Here is a list of all your accounts credentials")
+                                    print("Here is a list of all your stored account credentials"+"*"*70)
                                     print('\n')
 
                                     for credential in display_credentials():
-                                            print(f"ACCOUNT:{credential.account} \nUSER:{credential.username} \nPASSWORD:{credential.password}")
+                                            print(f"ACCOUNT:{credential.account} \nUSER:{credential.username} \nPASSWORD:{gen}")
 
                                     print('\n')
                             else:
@@ -182,7 +184,7 @@ def main():
                         print("Enter the name of account you wish to delete:")
                         account=input()
                         deleted=del_credentials(account)
-                        print(f"The {deleted.account} account has been deleted sussesfully!")
+                        print(f"The {deleted.account} account has been deleted sussesfully!\n")
 
                
                     elif short_code == "ex": #exit  credential creation on user selection
