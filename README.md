@@ -42,4 +42,4 @@ incase of any issues unadressed here or for general comments, contact **ochrist7
 ### License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Copyright (c) vector [2020]
+Copyright (c) [2020] [vector]
