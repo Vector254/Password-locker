@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.8
 
 from random import choice,randint
+import pyperclip #import this module for copy paste operations
 from user import User
 """import the user class blueprint"""
 
@@ -43,7 +44,6 @@ def save_credentials(credentials):
     Function to save credentials
     '''
     Credentials.save_credential(credentials)
-    
 
 def del_credentials(account):
     '''
@@ -61,11 +61,13 @@ def display_credentials():
     '''
     return Credentials.display_credential()
 
-def copy_credentials():
+def copy_credentials(name):
     '''
     Function that copies account details to clipboard
     '''
-    return copy_credentials()
+    toCopy=Credentials.find_account(name)
+    return pyperclip.copy(toCopy)
+    
 
 def gen_password(num_numbers=3, num_special=2, num_chars=3):
         '''function to generate a random password'''
@@ -133,7 +135,7 @@ def main():
             
                     print(f"Hello {username} Welcome to your Password Locker account.") 
 
-                    print("WHAT WOULD YOU LIKE TO DO?\n"+"*"*70+" :\ncc - create new credentials, \ndc - display all credentials, \ndel - delete account credentials, \nex - logout ")
+                    print("WHAT WOULD YOU LIKE TO DO?\n"+"*"*70+" :\ncc - create new credentials, \ndc - display all credentials, \ndel - delete account credentials, \ncopy - copy credentials \nex - logout,")
                     '''prompt for user input to proceed'''
                     short_code = input().lower()
 
@@ -186,6 +188,11 @@ def main():
                         deleted=del_credentials(account)
                         print(f"The {deleted.account} account has been deleted sussesfully!\n")
 
+                    elif short_code == 'copy':
+                        print("Please enter the name of the account you want to copy")
+                        name=input()
+                        copy=copy_credentials(name)
+                        print(f"{copy.account} copied successfully!")
                
                     elif short_code == "ex": #exit  credential creation on user selection
                         print("Goodbye .......courtesy PLocker(vector) 2020")
